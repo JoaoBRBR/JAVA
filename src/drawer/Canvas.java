@@ -73,10 +73,13 @@ public class Canvas{
         } 
     }
 
+    // must be improved
     public void line(int x1, int y1, int x2, int y2){
         float notZero = (x2 - x1);
+        boolean perfectVertical = false;
         if(notZero == 0){
             notZero = 0001;
+            perfectVertical = true;
         }
         float m = (y2 - y1) / notZero;
         float b = y1 - m * x1;
@@ -102,10 +105,14 @@ public class Canvas{
         }
         for(int i = sy; i < by; i++){
             int myX = (int) Math.round((i - b) / m);
-            for(int j = sx; j < bx; j++){
-                int myY = (int) Math.round(m * j + b);
-                if((checkVertical && j == myX) || (!checkVertical && i == myY)){
-                    frame[i][j] = currentColor + inclination;
+            if(perfectVertical){
+                frame[i][x1] = currentColor + inclination;
+            }else{
+                for(int j = sx; j < bx; j++){
+                    int myY = (int) Math.round(m * j + b);
+                    if((checkVertical && j == myX) || (!checkVertical && i == myY)){
+                        frame[i][j] = currentColor + inclination;
+                    }
                 }
             }
         }
@@ -123,6 +130,15 @@ public class Canvas{
         currentColor = newColor.getCode();
     }
 
+    public void setColorRgb(int r, int g, int b) {
+        currentColor = "\u001B[38;2;" + r + ";" + g + ";" + b + "m";
+    }
+
+    public static double map(double value,
+                            double fromMin, double fromMax,
+                            double toMin, double toMax) {
+        return (value - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
+    } 
     ///////////////////
     //PRIVATE METHODS//
     ///////////////////

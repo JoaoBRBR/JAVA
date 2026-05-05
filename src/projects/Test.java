@@ -3,6 +3,7 @@ package projects;
 import drawer.Canvas;
 import drawer.Colors;
 
+//Here I just tested all the functions from draw.
 public class Test {
     int x = 0;
     int dir = 1;
@@ -22,7 +23,6 @@ public class Test {
 
         while(true){
             drawer.drawCanvas();
-
 
             drawer.setColor(Colors.GREEN);
             for(int i = 0; i < 10; i++){
@@ -56,8 +56,41 @@ public class Test {
                 dirY *= -1;
             }
 
-            drawer.delay(10);
-            
+            drawer.setColorRgb(255,0,0);
+            drawer.rect(0,30,5,5,"A");
+
+            drawer.setColorRgb(0,255,0);
+            drawer.rect(5,30,5,5,"B");
+
+            drawer.setColorRgb(0,0,255);
+            drawer.rect(10,30,5,5,"C");
+
+            drawer.setColorRgb(255,255,0);
+            drawer.rect(15,30,5,5,"D");
+
+            drawer.setColorRgb(255,0,255);
+            drawer.rect(20,30,5,5,"E");
+
+            drawer.setColorRgb(0,255,255);
+            drawer.rect(25,30,5,5,"F");
+
+            for(int i = 0; i < drawer.width; i++){
+                int gradient = (int) Math.round(drawer.map(i,0,drawer.width,0,255));
+                drawer.setColorRgb(gradient,0,0);
+                drawer.drawChar('8',i,1);
+                drawer.setColorRgb(0,gradient,0);
+                drawer.drawChar('6',i,2);
+                drawer.setColorRgb(0,0,gradient);
+                drawer.drawChar('Q',i,3);
+                drawer.setColorRgb(gradient,gradient,gradient);
+                drawer.drawChar('1',i,4);
+                drawer.drawChar('2',i,5);
+                drawer.drawChar('3',i,6);
+                drawer.drawChar('4',i,7);
+                drawer.drawChar('5',i,8);
+            }
+
+            drawer.delay(100);
         }
     }
 }
