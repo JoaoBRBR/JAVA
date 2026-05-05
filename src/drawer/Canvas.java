@@ -73,6 +73,44 @@ public class Canvas{
         } 
     }
 
+    public void line(int x1, int y1, int x2, int y2){
+        float notZero = (x2 - x1);
+        if(notZero == 0){
+            notZero = 0001;
+        }
+        float m = (y2 - y1) / notZero;
+        float b = y1 - m * x1;
+        char inclination = getCharInclination(m);
+        boolean checkVertical = true;
+        if(inclination == '-'){
+            checkVertical = false;
+        }
+        int sx,sy,bx,by;
+        if(x1 < x2){
+            sx = x1;
+            bx = x2;
+        }else{
+            sx = x2;
+            bx = x1;
+        }
+        if(y1 < y2){
+            sy = y1;
+            by = y2;
+        }else{
+            sy = y2;
+            by = y1;
+        }
+        for(int i = sy; i < by; i++){
+            int myX = (int) Math.round((i - b) / m);
+            for(int j = sx; j < bx; j++){
+                int myY = (int) Math.round(m * j + b);
+                if((checkVertical && j == myX) || (!checkVertical && i == myY)){
+                    frame[i][j] = currentColor + inclination;
+                }
+            }
+        }
+    }
+
     public void delay(int ms){
         try {
             Thread.sleep(ms);
@@ -84,9 +122,22 @@ public class Canvas{
     public void setColor(Colors newColor){
         currentColor = newColor.getCode();
     }
+
     ///////////////////
     //PRIVATE METHODS//
     ///////////////////
+
+    private char getCharInclination(float module){
+        if(module >= -0.2 && module <= 0.2){
+            return '-';
+        }else if(module > 0.2 && module <= 2){
+            return '\\';
+        }else if(module < -0.2 && module >= -2){
+            return '/';
+        }else{
+            return '|';
+        }
+    }
 
     private static void clearScreen(){
         System.out.print("\033[H");
