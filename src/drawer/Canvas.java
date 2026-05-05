@@ -1,8 +1,11 @@
-public class Drawer{
-    int width;
-    int height;
+package drawer;
+import drawer.Colors;
+
+public class Canvas{
+    public int width;
+    public int height;
+    public boolean border;
     int borderSpace = 0; 
-    boolean border;
     String[][] frame;
     String currentColor = Colors.RESET.getCode();
 
@@ -55,6 +58,19 @@ public class Drawer{
                 frame[i][j] = currentColor + letter;
             }
         }
+    }
+
+    public void circle(int x, int y, int diameter, String letter){
+        float radius = diameter / 2;
+        for(int i = y; i < diameter + y + 1; i++){
+            for(int j = x ; j < diameter + x + 1; j++){
+                float xCenter = x + radius;
+                float yCenter = y + radius;
+                if(((i - yCenter) * (i - yCenter)) * 4 + (j - xCenter) * (j - xCenter) <= radius * radius){
+                    frame[i][j] = currentColor + letter;
+                }  
+            }
+        } 
     }
 
     public void delay(int ms){

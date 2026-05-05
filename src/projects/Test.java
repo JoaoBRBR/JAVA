@@ -1,3 +1,8 @@
+package projects;
+
+import drawer.Canvas;
+import drawer.Colors;
+
 public class Test {
     int x = 0;
     int dir = 1;
@@ -8,8 +13,8 @@ public class Test {
     }
 
     private void start() {
-        Drawer drawer = new Drawer();
-        drawer.startCanvas(50, 20, true);
+        Canvas drawer = new Canvas();
+        drawer.startCanvas(50, 25, true);
         while(true){
             drawer.drawCanvas();
             drawer.setColor(Colors.RED);
@@ -24,11 +29,11 @@ public class Test {
                 drawer.drawChar('.', (int) Math.round(Math.random() * (drawer.width -1)) , (int) Math.round(Math.random() * (drawer.height-1)));
             }
 
-            drawer.setColor(Colors.BRIGHT_GREEN);
-            drawer.rect(2,2,10,4,"O");
+            drawer.setColor(Colors.BRIGHT_RED);
+            drawer.rect(2,2,5,10,"#");
 
-            // drawer.setColor(Colors.BRIGHT_RED);
-            // drawer.circle(20, 10, 5, "O");
+            drawer.setColor(Colors.BRIGHT_RED);
+            drawer.circle(20, 2, 10, "O");
 
             drawer.delay(100);
         }
