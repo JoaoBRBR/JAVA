@@ -23,7 +23,7 @@ public class Canvas{
     }
 
     
-    public void drawCanvas(){
+    public void drawCanvas(boolean reset){
         clearScreen();
         StringBuilder canvasFrame = new StringBuilder("");
         drawTopBorder(canvasFrame);
@@ -37,7 +37,9 @@ public class Canvas{
         }
         drawTopBorder(canvasFrame);
         System.out.println(canvasFrame.toString());
-        clearFrame();
+        if(reset){
+            clearFrame();
+        }
     } 
 
     public void clearFrame(){

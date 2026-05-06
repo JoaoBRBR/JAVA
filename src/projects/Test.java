@@ -19,10 +19,10 @@ public class Test {
 
     private void start() {
         Canvas drawer = new Canvas();
-        drawer.startCanvas(80, 35, true);
+        drawer.startCanvas(150, 50, true);
 
         while(true){
-            drawer.drawCanvas();
+            drawer.drawCanvas(true);
 
             drawer.setColor(Colors.GREEN);
             for(int i = 0; i < 10; i++){
@@ -40,13 +40,16 @@ public class Test {
             drawer.line(40,25,x,y);
 
             a += 0.1;
+            if(a > 100){
+                a = 0;
+            }
             int cX = (int) Math.round(Math.sin(a)*radius);
             int cY = (int) Math.round(Math.cos(a)*radius/2);
             drawer.setColor(Colors.RED);
             drawer.line(25,25,25 + cX,25 + cY);
             
             drawer.setColor(Colors.RED);
-            drawer.drawChar('X', x, 10 + cY);
+            drawer.drawChar('X', x, 30 + cY);
             x += dir;
             y += dirY;
             if(x == 0 || x == drawer.width - 1){
@@ -90,7 +93,7 @@ public class Test {
                 drawer.drawChar('5',i,8);
             }
 
-            drawer.delay(100);
+            drawer.delay(10);
         }
     }
 }
